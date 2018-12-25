@@ -59,12 +59,11 @@
                             offset:'t',
                             icon:1
                         });
-                    if (data.status === 1) {
-                        window.href='jsp/menu.jsp';
+                    if (data.status === "1") {
+                        window.location.href='jsp/menu.jsp';
                     }
                 },
                 error:function (data) {
-                    console.log(data);
                 }
             });
             return false;

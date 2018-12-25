@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import qcg.bean.User;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * @Author: qcg
  * @Description:
@@ -18,9 +20,10 @@ public class LoginController {
 
 	@RequestMapping(value = "/login",method = RequestMethod.POST)
 	@ResponseBody
-	public JSONObject login(User user){
+	public JSONObject login(User user, HttpSession session){
 		JSONObject jsonObject = new JSONObject();
 		if ("admin".equals(user.getUsername()) && "admin".equals(user.getPassword())){
+			session.setAttribute("username",user.getUsername());
 			jsonObject.put("status", "1");
 			jsonObject.put("msg", "登录成功!");
 		}else {
