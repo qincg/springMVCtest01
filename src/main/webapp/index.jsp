@@ -60,7 +60,7 @@
                             icon:1
                         });
                     if (data.status === "1") {
-                        window.location.href='jsp/menu.jsp';
+                        window.location.href='menu/main';
                     }
                 },
                 error:function (data) {
