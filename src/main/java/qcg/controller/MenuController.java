@@ -5,7 +5,6 @@ import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -26,7 +25,7 @@ public class MenuController {
         JSONObject jsonObject2 = new JSONObject();
 	    jsonObject2.put("title", "用户列表");
 	    jsonObject2.put("icon", "");
-	    jsonObject2.put("href", "javascript:void(0);");
+	    jsonObject2.put("href", "/user/list");
 	    jsonObject2.put("id", "222");
         // 二级导航
         JSONArray jsonArray = new JSONArray();

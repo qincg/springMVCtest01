@@ -16,16 +16,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/user")
 public class UserController {
 
-	@RequestMapping(value = "/userList",method = RequestMethod.GET)
+	@RequestMapping(value = "/list",method = RequestMethod.GET)
 	public String view(){
 		return "userList";
 	}
-	@RequestMapping(value="/userList",method = RequestMethod.POST)
+	@RequestMapping(value="/list",method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject list(){
 		// 构造返回数据
 		int count = 1000;
-		String msg = "哈哈";
+		String msg = "";
 		JSONArray jsonArray = new JSONArray();
 		for(int i = 0 ; i < 50 ; i ++) {
 			JSONObject jsonObject = new JSONObject();
@@ -38,6 +38,7 @@ public class UserController {
 		jsonObject.put("count", count);
 		jsonObject.put("msg", msg);
 		jsonObject.put("data", jsonArray);
+		jsonObject.put("code", 0);
 		return jsonObject;
 	}
 }

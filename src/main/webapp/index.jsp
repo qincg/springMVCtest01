@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <title>登录</title>
-        <link rel="stylesheet" href="layui/css/layui.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
         <style>
             .input-my{
                 padding-left:38px;
@@ -41,7 +41,7 @@
         </div>
     </div>
 </div>
-<script src="layui/layui.js"></script>
+<script src="${pageContext.request.contextPath}/layui/layui.js"></script>
 <script>
     layui.use(['layer','form'],function () {
         var layer = layui.layer;
@@ -55,12 +55,17 @@
                 type:'post',
                 dataType:'json',
                 success:function (data) {
-                    layer.msg(data.msg, {
+                    if(data.status === "1"){
+                        layer.msg(data.msg, {
                             offset:'t',
                             icon:1
                         });
-                    if (data.status === "1") {
-                        window.location.href='menu/main';
+                        window.location.href='${pageContext.request.contextPath}/menu/main';
+                    }else{
+                        layer.msg(data.msg,{
+                            offset:'t',
+                            icon:2
+                        })
                     }
                 },
                 error:function (data) {

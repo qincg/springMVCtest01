@@ -11,7 +11,7 @@
 <head>
     <meta http-equiv="content-type" charset="UTF-8" content="text/html">
     <title>首页</title>
-    <link rel="stylesheet" href="../layui/css/layui.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css"/>
     <style>
         .myAdmin-iframe{
             width: 100%;
@@ -45,7 +45,7 @@
             <ul class="layui-nav layui-nav-tree" lay-filter="myAdmintree">
                 <c:forEach items="${requestScope.menuData}" var="menu">
                     <li class="layui-nav-item">
-                        <a href="javascript:void(0);" lay-href="" id="${menu.id}">${menu.title}</a>
+                        <a href="javascript:void(0);" lay-href="${menu.href}" id="${menu.id}">${menu.title}</a>
                         <dl class="layui-nav-child">
                             <c:forEach items="${menu.childs}" var="child">
                                 <dd>
@@ -73,7 +73,7 @@
         <center>哈哈</center>
     </div>
 </div>
-<script src="../layui/layui.js"></script>
+<script src="${pageContext.request.contextPath}/layui/layui.js"></script>
 <script>
     layui.use('element',function () {
         var element = layui.element;
@@ -85,7 +85,7 @@
             console.log(url);
             element.tabAdd('myAdminTab', {
                 title: title,
-                content : '<iframe src= "' + url + '" class="myAdmin-iframe"></iframe>',
+                content : '<iframe src= "${pageContext.request.contextPath}' + url + '" class="myAdmin-iframe"></iframe>',
                 id : id
             });
             element.tabChange('myAdminTab',id);
