@@ -22,6 +22,12 @@ public class MenuController {
         jsonObject1.put("title", "一级菜单");
         jsonObject1.put("icon", "");
         jsonObject1.put("href", "javascript:;");
+        jsonObject1.put("id", "1111");
+        JSONObject jsonObject2 = new JSONObject();
+	    jsonObject2.put("title", "用户列表");
+	    jsonObject2.put("icon", "");
+	    jsonObject2.put("href", "javascript:void(0);");
+	    jsonObject2.put("id", "222");
         // 二级导航
         JSONArray jsonArray = new JSONArray();
         for (int i = 0 ; i< 3; i ++){
@@ -29,10 +35,12 @@ public class MenuController {
             jsonObject.put("title", "二级导航" + i + 1);
             jsonObject.put("icon", "");
             jsonObject.put("href", "http://www.baidu.com");
+	        jsonObject.put("id", i);
             jsonArray.add(jsonObject);
         }
         jsonObject1.put("childs", jsonArray);
         jsonArray1.add(jsonObject1);
+        jsonArray1.add(jsonObject2);
         modelAndView.addObject("menuData", jsonArray1);
         return modelAndView;
     }

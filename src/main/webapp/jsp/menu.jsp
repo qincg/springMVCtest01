@@ -12,6 +12,16 @@
     <meta http-equiv="content-type" charset="UTF-8" content="text/html">
     <title>首页</title>
     <link rel="stylesheet" href="../layui/css/layui.css"/>
+    <style>
+        .myAdmin-iframe{
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+        }
+    </style>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -29,17 +39,17 @@
             <li class="layui-nav-item">退出</li>
         </ul>
     </div>
-    <%--头部导航----end--%>
+    <%--左侧菜单--%>
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
             <ul class="layui-nav layui-nav-tree" lay-filter="myAdmintree">
                 <c:forEach items="${requestScope.menuData}" var="menu">
                     <li class="layui-nav-item">
-                        <a href="${menu.href}">${menu.title}</a>
+                        <a href="javascript:void(0);" lay-href="" id="${menu.id}">${menu.title}</a>
                         <dl class="layui-nav-child">
                             <c:forEach items="${menu.childs}" var="child">
                                 <dd>
-                                    <a lay-href="${child.href}">${child.title}</a>
+                                    <a href="javascript:void(0);" lay-href="${child.href}" id="${child.id}">${child.title}</a>
                                 </dd>
                             </c:forEach>
                         </dl>
@@ -48,12 +58,38 @@
             </ul>
         </div>
     </div>
+    <%--右侧内容区域--%>
+    <div class="layui-body">
+        <div class="layui-tab" lay-allowClose="true" lay-filter="myAdminTab">
+            <ul class="layui-tab-title">
+                <li class="layui-this">首页</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show"> 1</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-footer">
+        <center>哈哈</center>
+    </div>
 </div>
 <script src="../layui/layui.js"></script>
 <script>
     layui.use('element',function () {
         var element = layui.element;
-
+        element.on('nav(myAdmintree)',function (elem) {
+            console.log(elem);
+            var url = elem.context.attributes['lay-href'].value;
+            var title = elem.context.innerHTML;
+            var id = elem.context.id;
+            console.log(url);
+            element.tabAdd('myAdminTab', {
+                title: title,
+                content : '<iframe src= "' + url + '" class="myAdmin-iframe"></iframe>',
+                id : id
+            });
+            element.tabChange('myAdminTab',id);
+        })
     })
 </script>
 </body>
