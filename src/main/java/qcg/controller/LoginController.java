@@ -10,9 +10,8 @@ import qcg.bean.User;
 import javax.servlet.http.HttpSession;
 
 /**
- * @Author: qcg
- * @Description:
- * @Date: 2018/12/25 13:06
+ * @author qcg
+ * @date 2018/12/25 13:06
  */
 @Controller
 @RequestMapping("/user")

@@ -8,9 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * @Author: qcg
- * @Description:
- * @Date: 2018/12/27 15:32
+ * @author qcg
+ * @date 2018/12/27 15:32
  */
 @Controller
 @RequestMapping("/user")

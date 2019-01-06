@@ -3,9 +3,8 @@ package qcg.bean;
 import java.io.Serializable;
 
 /**
- * @Author: qcg
- * @Description:
- * @Date: 2018/12/25 13:08
+ * @author qcg
+ * @date 2018/12/25 13:08
  */
 public class User implements Serializable {
 	private String id;
