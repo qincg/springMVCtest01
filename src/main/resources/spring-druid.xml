@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--引入资源文件-->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <!--数据源 druid-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="url" value="${jdbc.url}"/>
+        <!--文档说驱动类型不用配置，自己会配置，支持主流数据库-->
+        <!--<property name="driverClassName" value="${jdbc.driver}"/>-->
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <!--配置拦截器，常用的有:防御sql注入wall,日志log4j,监控统计stat-->
+        <!--统计合并merge，比如合并为：select * from table where id = ?-->
+        <property name="filters" value="mergeStat,wall"/>
+        <property name="proxyFilters">
+            <list>
+                <ref bean="log4j2Filter"/>
+            </list>
+        </property>
+        <!--配置初始化数量，最大数量，最小数量-->
+        <property name="initialSize" value="3"/>
+        <property name="minIdle" value="5"/>
+        <property name="maxActive" value="10"/>
+        <!--超时等待时间-->
+        <property name="maxWait" value="60000"/>
+    </bean>
+    <!--druid 输出日志-->
+    <bean id="log4j2Filter" class="com.alibaba.druid.filter.logging.Log4j2Filter">
+        <property name="statementExecutableSqlLogEnable" value="true"/>
+    </bean>
+</beans>

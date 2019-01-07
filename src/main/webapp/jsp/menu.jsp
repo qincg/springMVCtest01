@@ -78,11 +78,9 @@
     layui.use('element',function () {
         var element = layui.element;
         element.on('nav(myAdmintree)',function (elem) {
-            console.log(elem);
             var url = elem.context.attributes['lay-href'].value;
             var title = elem.context.innerHTML;
             var id = elem.context.id;
-            console.log(url);
             element.tabAdd('myAdminTab', {
                 title: title,
                 content : '<iframe src= "${pageContext.request.contextPath}' + url + '" class="myAdmin-iframe"></iframe>',
