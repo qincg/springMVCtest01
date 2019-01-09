@@ -11,9 +11,15 @@
     <meta http-equiv="content-type" charset="UTF-8" content="text/html">
     <title>用户列表</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css"/>
+    <style>
+        .layui-table-cell .layui-form-checkbox[lay-skin="primary"]{
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    </style>
 </head>
 <body>
-<table class="layui-table" lay-even id="userTable">
+<table class="layui-table" lay-even id="userTable" lay-filter="userTableFilter">
 
 </table>
 <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
@@ -31,11 +37,34 @@
                 ,last: true //不显示尾页
             },
             cols : [[
-                {field:'id',title:'Id',sort:true,fixed:"left"},
+                {type:'checkbox'},
+                {field:'id',title:'Id',sort:true},
                 {field:'username',title:'用户名',sort:true},
                 {field:'password',title:'密码',sort:true}
-            ]]
+            ]],
+            toolbar:'default',
+            defaultToolbar: ['filter', 'print', 'exports'],
+            height:500
         });
+        table.on('toolbar(userTableFilter)',function (obj) {
+            console.log(obj);
+            var checkStatus = table.checkStatus('userTable');
+            console.log(checkStatus);
+            switch (obj.event) {
+                case 'add':
+                    layer.open({
+                        type:1,
+                        content:'https://www.baidu.com'
+                    });
+                    break;
+                case 'delete':
+                    layer.msg('删除');
+                    break;
+                case 'update':
+                    layer.msg('更新');
+                    break;
+            }
+        })
     })
 </script>
 </body>

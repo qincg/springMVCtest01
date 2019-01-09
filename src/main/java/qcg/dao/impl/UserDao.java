@@ -1,5 +1,6 @@
 package qcg.dao.impl;
 
+import org.apache.ibatis.annotations.Param;
 import qcg.bean.User;
 import qcg.dao.BaseDao;
 
@@ -16,5 +17,8 @@ public interface UserDao extends BaseDao<User> {
 	boolean modify(User user);
 
 	@Override
-	List<User> list();
+	List<User> list(@Param("start") int start, @Param("limit") int limit);
+
+	@Override
+	int size();
 }

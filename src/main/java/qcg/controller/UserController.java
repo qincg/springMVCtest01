@@ -2,10 +2,16 @@ package qcg.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import qcg.bean.User;
+import qcg.service.UserService;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @author qcg
@@ -14,25 +20,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/user")
 public class UserController {
+	@Autowired
+	private UserService userService;
 
-	@RequestMapping(value = "/list",method = RequestMethod.GET)
-	public String view(){
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String view() {
 		return "userList";
 	}
-	@RequestMapping(value="/list",method = RequestMethod.POST)
+
+	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	@ResponseBody
-	public JSONObject list(){
-		// 构造返回数据
-		int count = 1000;
-		String msg = "";
+	public JSONObject list(HttpServletRequest request) {
+		String page = request.getParameter("page");
+		String limit = request.getParameter("limit");
+		List<User> userList = userService.list(Integer.parseInt(page), Integer.parseInt(limit));
+		int count = userService.size();
 		JSONArray jsonArray = new JSONArray();
-		for(int i = 0 ; i < 50 ; i ++) {
-			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("id", i);
-			jsonObject.put("username", "用户"+i);
-			jsonObject.put("password", "密码"+i);
-			jsonArray.add(jsonObject);
-		}
+		jsonArray = JSONArray.parseArray(JSONObject.toJSONString(userList));
+		// 构造返回数据
+		String msg = "123";
+
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("count", count);
 		jsonObject.put("msg", msg);
