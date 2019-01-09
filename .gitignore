@@ -39,3 +39,4 @@ hs_err_pid*
 将删除 target/springMVCtest01/layui/
 将删除 target/springMVCtest01/test.jsp
 /springMVCtest01.iml
+/logs/
