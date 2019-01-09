@@ -10,6 +10,7 @@
 <html>
 <head>
     <meta http-equiv="content-type" charset="UTF-8" content="text/html">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>首页</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css"/>
     <style>
