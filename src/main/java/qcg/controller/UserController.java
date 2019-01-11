@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import qcg.bean.User;
 import qcg.service.UserService;
+import qcg.util.StringUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -45,6 +46,26 @@ public class UserController {
 		jsonObject.put("msg", msg);
 		jsonObject.put("data", jsonArray);
 		jsonObject.put("code", 0);
+		return jsonObject;
+	}
+
+	@RequestMapping(value = "/add",method = RequestMethod.GET)
+	public String addView(){
+		return "userAdd";
+	}
+
+	@RequestMapping(value = "/add",method = RequestMethod.POST)
+	@ResponseBody
+	public JSONObject add(User user){
+		boolean result = userService.add(user);
+		JSONObject jsonObject = new JSONObject();
+		if (result){
+			jsonObject.put("status", "1");
+			jsonObject.put("msg", "操作成功!");
+		}else {
+			jsonObject.put("status", "0");
+			jsonObject.put("msg", "操作失败!");
+		}
 		return jsonObject;
 	}
 }

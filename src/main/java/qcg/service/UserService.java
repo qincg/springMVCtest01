@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import qcg.bean.User;
 import qcg.dao.impl.UserDao;
+import qcg.util.StringUtil;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class UserService {
 	}
 
 	public boolean add(User user) {
+		user.setId(StringUtil.getUUID());
 		return userDao.create(user);
 	}
 

@@ -24,8 +24,9 @@
 </table>
 <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
 <script>
-    layui.use('table',function () {
+    layui.use(['table','jquery'],function () {
         var table = layui.table;
+        var $ = layui.$;
         table.render({
             elem : '#userTable',
             url : '${pageContext.request.contextPath}/user/list',
@@ -47,21 +48,30 @@
             height:500
         });
         table.on('toolbar(userTableFilter)',function (obj) {
-            console.log(obj);
             var checkStatus = table.checkStatus('userTable');
+            var dataCount = checkStatus.data.length;
             console.log(checkStatus);
             switch (obj.event) {
                 case 'add':
                     layer.open({
-                        type:1,
-                        content:'https://www.baidu.com'
+                        type:2,
+                        content:['${pageContext.request.contextPath}/user/add','no'],
+                        btn:['提交','取消'],
+                        yes:function (index, layero) {
+                            var submitButton = layero.find('iframe').contents().find('#addSubmit');
+                            submitButton.click();
+                        }
                     });
                     break;
                 case 'delete':
-                    layer.msg('删除');
+                    if(dataCount === 0){
+                        layer.alert('请至少选择一项！');
+                    }
                     break;
                 case 'update':
-                    layer.msg('更新');
+                    if(dataCount !== 1){
+                        layer.alert('请选择一项！');
+                    }
                     break;
             }
         })

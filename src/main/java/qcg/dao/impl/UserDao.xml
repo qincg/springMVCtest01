@@ -9,9 +9,7 @@
     <insert id="create" parameterType="qcg.bean.User">
         insert into user(
           <include refid="fieldName"/>
-        ) values(
-        <include refid="fieldName"/>
-        )
+        ) values(#{id},#{username},#{password})
     </insert>
     <select id="list" resultType="qcg.bean.User">
         select
